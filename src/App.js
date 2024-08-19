@@ -11,16 +11,12 @@ import './App.css'
 // Replace your code here
 
 class App extends Component {
-  state = {themeStatus: false}
-
   render() {
     return (
-      <>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
     )
   }
 }

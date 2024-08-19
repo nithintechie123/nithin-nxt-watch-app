@@ -25,6 +25,8 @@ export const HeaderNavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${props =>
+    props.activeThemeStatus ? '#ffffff' : '#000000'};
 `
 
 export const WebsiteLogo = styled.img`
@@ -37,7 +39,7 @@ export const WebsiteLogo = styled.img`
 
 export const MobileNavItemsContainer = styled.ul`
   margin: 0px;
-  width: 130px;
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -64,6 +66,13 @@ export const DesktopNavItemsContainer = styled.ul`
 `
 
 export const NavItem = styled.li``
+
+export const ThemeButton = styled.button`
+  background-color: transparent;
+  outline: none;
+  border-width: 0px;
+  cursor: pointer;
+`
 
 export const ProfileImageElement = styled.img`
   width: 28px;

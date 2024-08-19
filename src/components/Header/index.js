@@ -1,6 +1,8 @@
 import {FaMoon} from 'react-icons/fa'
 import {IoMenu} from 'react-icons/io5'
+
 import {FiLogOut} from 'react-icons/fi'
+import {BsBrightnessHigh} from 'react-icons/bs'
 
 import {
   HeaderNavContainer,
@@ -10,27 +12,47 @@ import {
   NavItem,
   ProfileImageElement,
   LogoutButton,
+  ThemeButton,
 } from '../../styledComponents'
 
 import NxtWatchContext from '../NxtWatchContext/context'
 
+const DarkThemeWebsiteLogo =
+  'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+
+const LightThemeWebsiteLogo =
+  'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+
 const Header = () => (
   <NxtWatchContext.Consumer>
     {value => {
-      const {themeStatus} = value
-      console.log(themeStatus)
+      const {themeStatus, changeThemeButton} = value
+
+      const onClickThemeButton = () => {
+        changeThemeButton()
+      }
+
+      const activeWebsiteLogo = themeStatus
+        ? LightThemeWebsiteLogo
+        : DarkThemeWebsiteLogo
+
+      const activeThemeLogo = themeStatus ? (
+        <FaMoon size={20} />
+      ) : (
+        <BsBrightnessHigh size={20} color="white" />
+      )
+
       return (
-        <HeaderNavContainer>
-          <WebsiteLogo
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="website logo"
-          />
+        <HeaderNavContainer activeThemeStatus={themeStatus}>
+          <WebsiteLogo src={activeWebsiteLogo} alt="website logo" />
           <MobileNavItemsContainer>
             <NavItem>
-              <FaMoon size={20} />
+              <ThemeButton type="button" onClick={onClickThemeButton}>
+                {activeThemeLogo}
+              </ThemeButton>
             </NavItem>
             <NavItem>
-              <IoMenu size={22} />
+              <IoMenu size={22} color="white" />
             </NavItem>
             <NavItem>
               <FiLogOut size={22} />
@@ -38,7 +60,9 @@ const Header = () => (
           </MobileNavItemsContainer>
           <DesktopNavItemsContainer>
             <NavItem>
-              <FaMoon size={22} />
+              <ThemeButton type="button" onClick={onClickThemeButton}>
+                {activeThemeLogo}
+              </ThemeButton>
             </NavItem>
             <NavItem>
               <ProfileImageElement
