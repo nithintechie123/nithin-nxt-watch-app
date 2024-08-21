@@ -17,7 +17,6 @@ class Home extends Component {
 
   render() {
     const {themeStatus} = this.state
-    console.log(themeStatus)
 
     return (
       <NxtWatchContext.Provider

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const NxtWatchContext = React.createContext({
-  themeStatus: false,
+  themeStatus: true,
   changeThemeButton: () => {},
 })
 

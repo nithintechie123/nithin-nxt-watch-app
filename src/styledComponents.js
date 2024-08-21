@@ -1,24 +1,88 @@
 import styled from 'styled-components'
 
-export const LoginContainer = styled.div``
+export const LoginContainer = styled.div`
+  background-color: ${props => props.loginBackgroundColor};
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
-export const FormContainer = styled.form``
+export const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 300px;
+  width: 300px;
+  box-shadow: ${props =>
+    props.themeStatus ? null : '10px 10px 20px 1px #e2e8f0'};
+  border-radius: 10px;
+  background-color: ${props => (props.themeStatus ? '#000000' : '#ffffff')};
 
-export const FormContainerImageElement = styled.img``
+  @media screen and (max-width: 578px) {
+    max-width: 80%;
+  }
+`
 
-export const InputContainer = styled.div``
+export const FormContainerImageElement = styled.img`
+  width: 100px;
+  align-self: center;
+  margin-bottom: 20px;
+`
 
-export const LabelElement = styled.label``
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+`
 
-export const InputElement = styled.input``
+export const LabelElement = styled.label`
+  color: ${props => (props.themeStatus ? '#ffffff' : '#475569')};
+  font-size: 15px;
+  margin-bottom: 5px;
+  font-family: 'Roboto';
+  font-weight: 500;
+`
 
-export const ShowPasswordContainer = styled.div``
+export const InputElement = styled.input`
+  padding: 8px;
+  border-radius: 4px;
+  border-width: 0px;
+  border: 1px solid #94a3b8;
+  background-color: ${props => (props.themeStatus ? 'transparent' : null)};
+  outline: none;
+`
 
-export const PasswordTickBox = styled.input``
+export const ShowPasswordContainer = styled.div`
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+`
 
-export const PasswordLabelElement = styled.label``
+export const PasswordTickBox = styled.input`
+  width: 20px;
+  cursor: pointer;
+  margin: 0px;
+`
 
-export const LoginButton = styled.button``
+export const PasswordLabelElement = styled.label`
+  color: #0f0f0f;
+  font-family: 'Roboto';
+  color: ${props => (props.themeStatus ? '#ffffff' : '000000')};
+`
+
+export const LoginButton = styled.button`
+  background-color: #3b82f6;
+  border-radius: 6px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 15px;
+  border-width: 0px;
+  color: #ffffff;
+  padding: 8px;
+  cursor: pointer;
+`
 
 export const HeaderNavContainer = styled.nav`
   padding: 15px;
