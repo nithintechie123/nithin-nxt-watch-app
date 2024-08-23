@@ -1,3 +1,7 @@
+import {withRouter} from 'react-router-dom'
+
+import Cookies from 'js-cookie'
+
 import {FaMoon} from 'react-icons/fa'
 import {IoMenu} from 'react-icons/io5'
 
@@ -23,61 +27,73 @@ const DarkThemeWebsiteLogo =
 const LightThemeWebsiteLogo =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
-const Header = () => (
-  <NxtWatchContext.Consumer>
-    {value => {
-      const {themeStatus, changeThemeButton} = value
+const Header = props => {
+  const onClickLogout = () => {
+    const {history} = props
+    Cookies.remove('jwt_token')
+    history.replace('/login')
+  }
 
-      const onClickThemeButton = () => {
-        changeThemeButton()
-      }
+  return (
+    <NxtWatchContext.Consumer>
+      {value => {
+        const {themeStatus, changeThemeButton} = value
 
-      const activeWebsiteLogo = themeStatus
-        ? LightThemeWebsiteLogo
-        : DarkThemeWebsiteLogo
+        const onClickThemeButton = () => {
+          changeThemeButton()
+        }
 
-      const activeThemeLogo = themeStatus ? (
-        <FaMoon size={20} />
-      ) : (
-        <BsBrightnessHigh size={20} color="white" />
-      )
+        const activeWebsiteLogo = themeStatus
+          ? LightThemeWebsiteLogo
+          : DarkThemeWebsiteLogo
 
-      return (
-        <HeaderNavContainer activeThemeStatus={themeStatus}>
-          <WebsiteLogo src={activeWebsiteLogo} alt="website logo" />
-          <MobileNavItemsContainer>
-            <NavItem>
-              <ThemeButton type="button" onClick={onClickThemeButton}>
-                {activeThemeLogo}
-              </ThemeButton>
-            </NavItem>
-            <NavItem>
-              <IoMenu size={22} color="white" />
-            </NavItem>
-            <NavItem>
-              <FiLogOut size={22} />
-            </NavItem>
-          </MobileNavItemsContainer>
-          <DesktopNavItemsContainer>
-            <NavItem>
-              <ThemeButton type="button" onClick={onClickThemeButton}>
-                {activeThemeLogo}
-              </ThemeButton>
-            </NavItem>
-            <NavItem>
-              <ProfileImageElement
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                alt="profile"
-              />
-            </NavItem>
-            <NavItem>
-              <LogoutButton>Logout</LogoutButton>
-            </NavItem>
-          </DesktopNavItemsContainer>
-        </HeaderNavContainer>
-      )
-    }}
-  </NxtWatchContext.Consumer>
-)
+        const activeThemeLogo = themeStatus ? (
+          <FaMoon size={20} />
+        ) : (
+          <BsBrightnessHigh size={20} color="white" />
+        )
 
-export default Header
+        return (
+          <HeaderNavContainer activeThemeStatus={themeStatus}>
+            <WebsiteLogo src={activeWebsiteLogo} alt="website logo" />
+            <MobileNavItemsContainer>
+              <NavItem>
+                <ThemeButton type="button" onClick={onClickThemeButton}>
+                  {activeThemeLogo}
+                </ThemeButton>
+              </NavItem>
+              <NavItem>
+                <IoMenu size={22} color={themeStatus ? '#000000' : '#ffffff'} />
+              </NavItem>
+              <NavItem>
+                <FiLogOut
+                  size={22}
+                  onClick={onClickLogout}
+                  color={themeStatus ? '#000000' : '#ffffff'}
+                />
+              </NavItem>
+            </MobileNavItemsContainer>
+            <DesktopNavItemsContainer>
+              <NavItem>
+                <ThemeButton type="button" onClick={onClickThemeButton}>
+                  {activeThemeLogo}
+                </ThemeButton>
+              </NavItem>
+              <NavItem>
+                <ProfileImageElement
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                  alt="profile"
+                />
+              </NavItem>
+              <NavItem>
+                <LogoutButton onClick={onClickLogout}>Logout</LogoutButton>
+              </NavItem>
+            </DesktopNavItemsContainer>
+          </HeaderNavContainer>
+        )
+      }}
+    </NxtWatchContext.Consumer>
+  )
+}
+
+export default withRouter(Header)

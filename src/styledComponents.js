@@ -13,7 +13,7 @@ export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   padding: 20px;
-  height: 300px;
+  height: 320px;
   width: 300px;
   box-shadow: ${props =>
     props.themeStatus ? null : '10px 10px 20px 1px #e2e8f0'};
@@ -50,8 +50,9 @@ export const InputElement = styled.input`
   border-radius: 4px;
   border-width: 0px;
   border: 1px solid #94a3b8;
-  background-color: ${props => (props.themeStatus ? 'transparent' : null)};
+  background-color: ${props => (props.themeStatus ? 'transparent' : '#f1f5f9')};
   outline: none;
+  color: ${props => (props.themeStatus ? '#ffffff' : '#000000')};
 `
 
 export const ShowPasswordContainer = styled.div`
@@ -82,6 +83,12 @@ export const LoginButton = styled.button`
   color: #ffffff;
   padding: 8px;
   cursor: pointer;
+`
+
+export const ErrorMessage = styled.p`
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: #ff0000;
 `
 
 export const HeaderNavContainer = styled.nav`
@@ -157,3 +164,53 @@ export const LogoutButton = styled.button`
 `
 
 export const HomeContainer = styled.div``
+
+export const CrossButton = styled.button`
+  background-color: transparent;
+  outline: none;
+  border-width: 0px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  cursor: pointer;
+`
+
+export const BannerContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 20px;
+  @media screen and (min-width: 578px) {
+    background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png ');
+    background-size: cover;
+    position: relative;
+  } ;
+`
+
+export const PremiumPlansTextContainer = styled.div``
+
+export const NxtWatchImageElement = styled.img`
+  width: 150px;
+`
+
+export const PremiumPlansText = styled.p`
+  font-family: 'Roboto';
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #383838;
+  max-width: 250px;
+`
+
+export const GetItNowButton = styled.button`
+  border: 1px solid #1e293b;
+  font-family: 'Roboto';
+  font-weight: 450;
+  background-color: transparent;
+  padding: 8px;
+`
+
+export const HomeVideosContainer = styled.div`
+  background-color: ${props => (props.themeStatus ? '#0f0f0f' : ' #f1f1f1')};
+  height: 100vh;
+`

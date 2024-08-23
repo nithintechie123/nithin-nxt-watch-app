@@ -1,5 +1,9 @@
 import {Component} from 'react'
 
+import {Redirect} from 'react-router-dom'
+
+import Cookies from 'js-cookie'
+
 import {
   LoginContainer,
   FormContainer,
@@ -11,6 +15,7 @@ import {
   PasswordTickBox,
   PasswordLabelElement,
   LoginButton,
+  ErrorMessage,
 } from '../../styledComponents'
 
 import NxtWatchContext from '../NxtWatchContext/context'
@@ -22,43 +27,66 @@ const LightThemeWebsiteLogo =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
 class Login extends Component {
-  state = {userName: '', password: ''}
-
-  componentDidMount() {
-    this.onSubmitForm()
-  }
-
-  onSubmitForm = async event => {
-    event.preventDefault()
-    const {userName, password} = this.state
-
-    const loginApiUrl = 'https://apis.ccbp.in/login'
-    const userDetails = {userName, password}
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-
-    const response = await fetch(loginApiUrl, options)
-
-    const data = await response.json()
-  }
+  state = {username: '', password: '', errorMsg: '', showErrorMsg: false}
 
   onChangeUserName = event => {
-    this.setState({userName: event.target.value})
+    this.setState({username: event.target.value})
   }
 
   onChangePassword = event => {
     this.setState({password: event.target.value})
   }
 
+  onSubmitSuccess = jwtToken => {
+    const {history} = this.props
+
+    Cookies.set('jwt_token', jwtToken, {expires: 30})
+
+    history.replace('/')
+  }
+
+  onSubmitFailure = errorMsg => {
+    this.setState({showErrorMsg: true, errorMsg})
+  }
+
+  onSubmitForm = async event => {
+    event.preventDefault()
+
+    const {username, password} = this.state
+
+    const userDetails = {username, password}
+
+    const url = 'https://apis.ccbp.in/login'
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(userDetails),
+    }
+
+    const response = await fetch(url, options)
+
+    const data = await response.json()
+
+    if (response.ok === true) {
+      this.onSubmitSuccess(data.jwt_token)
+    } else {
+      this.onSubmitFailure(data.error_msg)
+    }
+  }
+
   render() {
-    const {userName, password} = this.state
+    const {username, password, showErrorMsg, errorMsg} = this.state
+
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
+
     return (
       <NxtWatchContext.Consumer>
         {value => {
           const {themeStatus} = value
-          console.log(themeStatus)
+
           const LoginBackgroundColor = themeStatus ? '#383838 ' : '#ffffff'
           const activeFormContainerLogo = themeStatus
             ? DarkThemeWebsiteLogo
@@ -67,7 +95,6 @@ class Login extends Component {
           return (
             <LoginContainer loginBackgroundColor={LoginBackgroundColor}>
               <FormContainer
-                type="form"
                 onSubmit={this.onSubmitForm}
                 themeStatus={themeStatus}
               >
@@ -81,7 +108,7 @@ class Login extends Component {
                     id="username"
                     placeholder="Username"
                     themeStatus={themeStatus}
-                    value={userName}
+                    value={username}
                     onChange={this.onChangeUserName}
                   />
                 </InputContainer>
@@ -107,8 +134,8 @@ class Login extends Component {
                     </PasswordLabelElement>
                   </ShowPasswordContainer>
                 </InputContainer>
-
                 <LoginButton type="submit">Login</LoginButton>
+                <ErrorMessage>{showErrorMsg && `*${errorMsg}`}</ErrorMessage>
               </FormContainer>
             </LoginContainer>
           )
