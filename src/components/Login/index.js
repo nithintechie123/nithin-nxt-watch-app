@@ -16,7 +16,7 @@ import {
   PasswordLabelElement,
   LoginButton,
   ErrorMessage,
-} from '../../styledComponents'
+} from './styledComponents'
 
 import NxtWatchContext from '../NxtWatchContext/context'
 

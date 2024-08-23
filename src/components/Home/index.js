@@ -3,6 +3,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 
 import {AiOutlineClose} from 'react-icons/ai'
+import {MdSearch} from 'react-icons/md'
 
 import {
   HomeContainer,
@@ -13,7 +14,10 @@ import {
   PremiumPlansText,
   GetItNowButton,
   HomeVideosContainer,
-} from '../../styledComponents'
+  SearchInputContainer,
+  SearchInput,
+  SearchButton,
+} from './styledComponents'
 
 import Header from '../Header'
 
@@ -23,10 +27,26 @@ const LightThemeWebsiteLogo =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
 class Home extends Component {
-  state = {themeStatus: false, showBannerPopup: true}
+  state = {themeStatus: false, showBannerPopup: true, searchInput: ''}
 
   componentDidMount() {
     this.getHomeVideosData()
+  }
+
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  changeThemeButton = () => {
+    this.setState(prevState => ({
+      themeStatus: !prevState.themeStatus,
+    }))
+  }
+
+  onClickCross = () => {
+    this.setState(prevState => ({
+      showBannerPopup: !prevState.showBannerPopup,
+    }))
   }
 
   getHomeVideosData = async () => {
@@ -41,21 +61,10 @@ class Home extends Component {
     }
 
     const response = await fetch(homeVideosUrl, options)
-    console.log(response)
-    const data = await response.json()
-    console.log(data)
-  }
-
-  changeThemeButton = () => {
-    this.setState(prevState => ({
-      themeStatus: !prevState.themeStatus,
-    }))
-  }
-
-  onClickCross = () => {
-    this.setState(prevState => ({
-      showBannerPopup: !prevState.showBannerPopup,
-    }))
+    if (response.ok === true) {
+      const data = await response.json()
+      console.log(data)
+    }
   }
 
   renderBanner = () => {
@@ -72,7 +81,7 @@ class Home extends Component {
               <GetItNowButton>GET IT NOW</GetItNowButton>
             </PremiumPlansTextContainer>
             <CrossButton type="button" onClick={this.onClickCross}>
-              <AiOutlineClose />
+              <AiOutlineClose size={25} color="#475569" />
             </CrossButton>
           </BannerContainer>
         )}
@@ -81,17 +90,27 @@ class Home extends Component {
   }
 
   render() {
-    const {themeStatus} = this.state
+    const {themeStatus, searchInput} = this.state
 
     return (
       <NxtWatchContext.Provider
         value={{themeStatus, changeThemeButton: this.changeThemeButton}}
       >
-        <HomeContainer>
+        <HomeContainer themeStatus={themeStatus}>
           <Header />
           {this.renderBanner()}
           <HomeVideosContainer themeStatus={themeStatus}>
-            <h1>Nithin</h1>
+            <SearchInputContainer>
+              <SearchInput
+                type="search"
+                placeholder="Search"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+              />
+              <SearchButton>
+                <MdSearch size={22} />
+              </SearchButton>
+            </SearchInputContainer>
           </HomeVideosContainer>
         </HomeContainer>
       </NxtWatchContext.Provider>

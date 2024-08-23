@@ -17,7 +17,7 @@ import {
   ProfileImageElement,
   LogoutButton,
   ThemeButton,
-} from '../../styledComponents'
+} from './styledComponents'
 
 import NxtWatchContext from '../NxtWatchContext/context'
 
