@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const HomeContainer = styled.div`
   background-color: ${props => (props.themeStatus ? ' #f9f9f9' : '#181818')};
+  height: 100%;
 `
 
 export const CrossButton = styled.button`
@@ -53,12 +54,16 @@ export const GetItNowButton = styled.button`
 
 export const HomeVideosContainer = styled.div`
   padding: 20px;
-  height: 100vh;
 `
 export const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   max-width: 300px;
+  border-radius: 2px;
+   transition: background-color 0.3s, transform 0.3s;
+    &:hover {
+    background-color:"transparent"; 
+    transform: scale(1.05);
 `
 
 export const SearchInput = styled.input`
@@ -66,12 +71,12 @@ export const SearchInput = styled.input`
   font-size: 15px;
   width: 100%;
   outline: none;
-  border: 2px solid #ebebeb;
+  border: 1px solid #ebebeb;
   padding: 5px;
+  background-color: ${props => (props.themeStatus ? '#f1f1f1' : 'transparent')};
 `
 
 export const SearchButton = styled.button`
-  background-color: '#ebebeb';
   outline: none;
   border-width: 0px;
   padding: 3px;
@@ -84,4 +89,11 @@ export const SearchButton = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+
+export const VideosContainer = styled.ul`
+  padding: 0px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
 `

@@ -5,6 +5,8 @@ import Cookies from 'js-cookie'
 import {AiOutlineClose} from 'react-icons/ai'
 import {MdSearch} from 'react-icons/md'
 
+import HomeVideoItem from '../HomeVideoItem'
+
 import {
   HomeContainer,
   BannerContainer,
@@ -17,6 +19,7 @@ import {
   SearchInputContainer,
   SearchInput,
   SearchButton,
+  VideosContainer,
 } from './styledComponents'
 
 import Header from '../Header'
@@ -27,7 +30,12 @@ const LightThemeWebsiteLogo =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
 
 class Home extends Component {
-  state = {themeStatus: false, showBannerPopup: true, searchInput: ''}
+  state = {
+    themeStatus: true,
+    showBannerPopup: true,
+    searchInput: '',
+    homeVideosData: [],
+  }
 
   componentDidMount() {
     this.getHomeVideosData()
@@ -61,9 +69,20 @@ class Home extends Component {
     }
 
     const response = await fetch(homeVideosUrl, options)
+
     if (response.ok === true) {
       const data = await response.json()
-      console.log(data)
+
+      const formattedHomeVideosData = data.videos.map(eachVideo => ({
+        id: eachVideo.id,
+        name: eachVideo.channel.name,
+        profileImageUrl: eachVideo.channel.profile_image_url,
+        publishedAt: eachVideo.published_at,
+        thumbnailUrl: eachVideo.thumbnail_url,
+        title: eachVideo.title,
+        viewCount: eachVideo.view_count,
+      }))
+      this.setState({homeVideosData: formattedHomeVideosData})
     }
   }
 
@@ -90,7 +109,8 @@ class Home extends Component {
   }
 
   render() {
-    const {themeStatus, searchInput} = this.state
+    const {themeStatus, searchInput, homeVideosData} = this.state
+    console.log(homeVideosData)
 
     return (
       <NxtWatchContext.Provider
@@ -106,11 +126,21 @@ class Home extends Component {
                 placeholder="Search"
                 value={searchInput}
                 onChange={this.onChangeSearchInput}
+                themeStatus={themeStatus}
               />
               <SearchButton>
                 <MdSearch size={22} />
               </SearchButton>
             </SearchInputContainer>
+            <VideosContainer>
+              {homeVideosData.map(eachVideo => (
+                <HomeVideoItem
+                  key={eachVideo.id}
+                  eachVideoDetails={eachVideo}
+                  themeStatus={themeStatus}
+                />
+              ))}
+            </VideosContainer>
           </HomeVideosContainer>
         </HomeContainer>
       </NxtWatchContext.Provider>
