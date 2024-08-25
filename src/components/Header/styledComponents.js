@@ -19,10 +19,6 @@ export const WebsiteLogo = styled.img`
 
   @media screen and (min-width: 768px) {
     width: 120px;
-    transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.05);
   } ;
 `
 
@@ -71,6 +67,10 @@ export const ThemeButton = styled.button`
 
 export const ProfileImageElement = styled.img`
   width: 28px;
+   transition: background-color 0.3s, transform 0.3s;
+    &:hover {
+    background-color:"transparent"; 
+    transform: scale(1.05);
 `
 
 export const LogoutButton = styled.button`
@@ -88,6 +88,6 @@ export const LogoutButton = styled.button`
    transition: background-color 0.3s, transform 0.3s;
     &:hover {
     background-color:#ffffff; 
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 `

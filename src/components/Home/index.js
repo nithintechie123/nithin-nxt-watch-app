@@ -100,7 +100,7 @@ class Home extends Component {
               <GetItNowButton>GET IT NOW</GetItNowButton>
             </PremiumPlansTextContainer>
             <CrossButton type="button" onClick={this.onClickCross}>
-              <AiOutlineClose size={25} color="#475569" />
+              <AiOutlineClose size={20} color="#475569" />
             </CrossButton>
           </BannerContainer>
         )}
@@ -110,7 +110,6 @@ class Home extends Component {
 
   render() {
     const {themeStatus, searchInput, homeVideosData} = this.state
-    console.log(homeVideosData)
 
     return (
       <NxtWatchContext.Provider

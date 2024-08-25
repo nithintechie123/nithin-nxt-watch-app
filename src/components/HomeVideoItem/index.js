@@ -1,4 +1,4 @@
-import {formatDistanceToNow} from 'date-fns'
+import {differenceInYears} from 'date-fns'
 
 import {BsDot} from 'react-icons/bs'
 
@@ -27,7 +27,14 @@ const HomeVideoItem = props => {
     publishedAt,
   } = eachVideoDetails
 
-  const formattedDate = formatDistanceToNow(new Date(publishedAt))
+  const formattedDate = publishedDate => {
+    const yearsAgo = differenceInYears(new Date(), new Date(publishedDate))
+
+    if (yearsAgo === 1) {
+      return `1 year ago`
+    }
+    return `${yearsAgo} years ago`
+  }
 
   return (
     <EachVideoItemContainer>
@@ -43,7 +50,7 @@ const HomeVideoItem = props => {
               <ViewsText>views</ViewsText>
             </ViewsCount>
             <BsDot />
-            <PublishedTimeText>{formattedDate}</PublishedTimeText>
+            <PublishedTimeText>{formattedDate(publishedAt)}</PublishedTimeText>
           </ViewsTimeContainer>
         </VideoTextContainer>
       </VideoDetailsContainer>

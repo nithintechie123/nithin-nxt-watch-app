@@ -26,6 +26,7 @@ export const ProfileImageElement = styled.img`
 export const VideoTextContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content:space-between
   align-items: flex-start;
   font-family: 'Roboto';
   width: 200px;
