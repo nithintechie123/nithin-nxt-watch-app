@@ -20,11 +20,14 @@ import {
   SearchInput,
   SearchButton,
   VideosContainer,
+  BannerHomeVideosContainer,
 } from './styledComponents'
 
 import Header from '../Header'
 
 import NxtWatchContext from '../NxtWatchContext/context'
+
+import SideBar from '../SideBarContainer'
 
 const LightThemeWebsiteLogo =
   'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
@@ -115,32 +118,35 @@ class Home extends Component {
       <NxtWatchContext.Provider
         value={{themeStatus, changeThemeButton: this.changeThemeButton}}
       >
+        <Header />
         <HomeContainer themeStatus={themeStatus}>
-          <Header />
-          {this.renderBanner()}
-          <HomeVideosContainer themeStatus={themeStatus}>
-            <SearchInputContainer>
-              <SearchInput
-                type="search"
-                placeholder="Search"
-                value={searchInput}
-                onChange={this.onChangeSearchInput}
-                themeStatus={themeStatus}
-              />
-              <SearchButton>
-                <MdSearch size={22} />
-              </SearchButton>
-            </SearchInputContainer>
-            <VideosContainer>
-              {homeVideosData.map(eachVideo => (
-                <HomeVideoItem
-                  key={eachVideo.id}
-                  eachVideoDetails={eachVideo}
+          <SideBar />
+          <BannerHomeVideosContainer>
+            {this.renderBanner()}
+            <HomeVideosContainer themeStatus={themeStatus}>
+              <SearchInputContainer>
+                <SearchInput
+                  type="search"
+                  placeholder="Search"
+                  value={searchInput}
+                  onChange={this.onChangeSearchInput}
                   themeStatus={themeStatus}
                 />
-              ))}
-            </VideosContainer>
-          </HomeVideosContainer>
+                <SearchButton>
+                  <MdSearch size={22} />
+                </SearchButton>
+              </SearchInputContainer>
+              <VideosContainer>
+                {homeVideosData.map(eachVideo => (
+                  <HomeVideoItem
+                    key={eachVideo.id}
+                    eachVideoDetails={eachVideo}
+                    themeStatus={themeStatus}
+                  />
+                ))}
+              </VideosContainer>
+            </HomeVideosContainer>
+          </BannerHomeVideosContainer>
         </HomeContainer>
       </NxtWatchContext.Provider>
     )

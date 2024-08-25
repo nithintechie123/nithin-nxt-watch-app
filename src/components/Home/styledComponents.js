@@ -3,7 +3,10 @@ import styled from 'styled-components'
 export const HomeContainer = styled.div`
   background-color: ${props => (props.themeStatus ? ' #f9f9f9' : '#181818')};
   height: 100%;
+  display: flex;
 `
+
+export const BannerHomeVideosContainer = styled.div``
 
 export const CrossButton = styled.button`
   background-color: transparent;
