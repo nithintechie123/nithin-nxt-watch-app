@@ -6,7 +6,7 @@ export const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  width: 250px;
   @media screen and (max-width: 768px) {
     display: none;
   }

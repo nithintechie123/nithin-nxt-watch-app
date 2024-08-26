@@ -34,7 +34,6 @@ const LightThemeWebsiteLogo =
 
 class Home extends Component {
   state = {
-    themeStatus: true,
     showBannerPopup: true,
     searchInput: '',
     homeVideosData: [],
@@ -46,12 +45,6 @@ class Home extends Component {
 
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value})
-  }
-
-  changeThemeButton = () => {
-    this.setState(prevState => ({
-      themeStatus: !prevState.themeStatus,
-    }))
   }
 
   onClickCross = () => {
@@ -112,45 +105,48 @@ class Home extends Component {
   }
 
   render() {
-    const {themeStatus, searchInput, homeVideosData} = this.state
+    const {searchInput, homeVideosData} = this.state
 
     return (
-      <NxtWatchContext.Provider
-        value={{themeStatus, changeThemeButton: this.changeThemeButton}}
-      >
-        <>
-          <Header />
-          <HomeContainer themeStatus={themeStatus}>
-            <SideBar themeStatus={themeStatus} />
-            <BannerHomeVideosContainer>
-              {this.renderBanner()}
-              <HomeVideosContainer themeStatus={themeStatus}>
-                <SearchInputContainer>
-                  <SearchInput
-                    type="search"
-                    placeholder="Search"
-                    value={searchInput}
-                    onChange={this.onChangeSearchInput}
-                    themeStatus={themeStatus}
-                  />
-                  <SearchButton>
-                    <MdSearch size={22} />
-                  </SearchButton>
-                </SearchInputContainer>
-                <VideosContainer>
-                  {homeVideosData.map(eachVideo => (
-                    <HomeVideoItem
-                      key={eachVideo.id}
-                      eachVideoDetails={eachVideo}
-                      themeStatus={themeStatus}
-                    />
-                  ))}
-                </VideosContainer>
-              </HomeVideosContainer>
-            </BannerHomeVideosContainer>
-          </HomeContainer>
-        </>
-      </NxtWatchContext.Provider>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {themeStatus} = value
+          return (
+            <>
+              <Header />
+              <HomeContainer themeStatus={themeStatus}>
+                <SideBar />
+                <BannerHomeVideosContainer>
+                  {this.renderBanner()}
+                  <HomeVideosContainer themeStatus={themeStatus}>
+                    <SearchInputContainer>
+                      <SearchInput
+                        type="search"
+                        placeholder="Search"
+                        value={searchInput}
+                        onChange={this.onChangeSearchInput}
+                        themeStatus={themeStatus}
+                      />
+                      <SearchButton>
+                        <MdSearch size={22} />
+                      </SearchButton>
+                    </SearchInputContainer>
+                    <VideosContainer>
+                      {homeVideosData.map(eachVideo => (
+                        <HomeVideoItem
+                          key={eachVideo.id}
+                          eachVideoDetails={eachVideo}
+                          themeStatus={themeStatus}
+                        />
+                      ))}
+                    </VideosContainer>
+                  </HomeVideosContainer>
+                </BannerHomeVideosContainer>
+              </HomeContainer>
+            </>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }
