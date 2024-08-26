@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 import {differenceInYears} from 'date-fns'
 
 import {BsDot} from 'react-icons/bs'
@@ -25,6 +27,7 @@ const HomeVideoItem = props => {
     title,
     viewCount,
     publishedAt,
+    id,
   } = eachVideoDetails
 
   const formattedDate = publishedDate => {
@@ -37,24 +40,28 @@ const HomeVideoItem = props => {
   }
 
   return (
-    <EachVideoItemContainer>
-      <VideoImageElement src={thumbnailUrl} alt={name} />
-      <VideoDetailsContainer>
-        <ProfileImageElement src={profileImageUrl} alt="profile" />
-        <VideoTextContainer>
-          <VideoHeading themeStatus={themeStatus}>{title}</VideoHeading>
-          <VideoGenreName>{name}</VideoGenreName>
-          <ViewsTimeContainer>
-            <ViewsCount>
-              {viewCount}
-              <ViewsText>views</ViewsText>
-            </ViewsCount>
-            <BsDot />
-            <PublishedTimeText>{formattedDate(publishedAt)}</PublishedTimeText>
-          </ViewsTimeContainer>
-        </VideoTextContainer>
-      </VideoDetailsContainer>
-    </EachVideoItemContainer>
+    <Link to={`/videos/${id}`}>
+      <EachVideoItemContainer>
+        <VideoImageElement src={thumbnailUrl} alt={name} />
+        <VideoDetailsContainer>
+          <ProfileImageElement src={profileImageUrl} alt="profile" />
+          <VideoTextContainer>
+            <VideoHeading themeStatus={themeStatus}>{title}</VideoHeading>
+            <VideoGenreName>{name}</VideoGenreName>
+            <ViewsTimeContainer>
+              <ViewsCount>
+                {viewCount}
+                <ViewsText>views</ViewsText>
+              </ViewsCount>
+              <BsDot />
+              <PublishedTimeText>
+                {formattedDate(publishedAt)}
+              </PublishedTimeText>
+            </ViewsTimeContainer>
+          </VideoTextContainer>
+        </VideoDetailsContainer>
+      </EachVideoItemContainer>
+    </Link>
   )
 }
 

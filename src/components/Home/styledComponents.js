@@ -1,21 +1,12 @@
 import styled from 'styled-components'
 
 export const HomeContainer = styled.div`
-  background-color: ${props => (props.themeStatus ? ' #f9f9f9' : '#181818')};
+  background-color: ${props => (props.themeStatus ? ' #f4f4f4' : '#181818')};
   height: 100%;
   display: flex;
 `
 
 export const BannerHomeVideosContainer = styled.div``
-
-export const CrossButton = styled.button`
-  background-color: transparent;
-  outline: none;
-  border-width: 0px;
-  font-family: 'Roboto';
-  font-weight: 500;
-  cursor: pointer;
-`
 
 export const BannerContainer = styled.div`
   display: flex;
@@ -27,9 +18,17 @@ export const BannerContainer = styled.div`
 
   @media screen and (min-width: 578px) {
     background-size: cover;
-    width: 100vw;
+
     height: 200px;
   }
+`
+export const CrossButton = styled.button`
+  background-color: transparent;
+  outline: none;
+  border-width: 0px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  cursor: pointer;
 `
 
 export const PremiumPlansTextContainer = styled.div``
