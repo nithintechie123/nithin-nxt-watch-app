@@ -5,8 +5,9 @@ export const HeaderNavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   background-color: ${props =>
-    props.activeThemeStatus ? '#ffffff' : '#000000'};
+    props.activeThemeStatus ? '#ffffff' : '#212121'};
 `
 
 export const WebsiteLogo = styled.img`

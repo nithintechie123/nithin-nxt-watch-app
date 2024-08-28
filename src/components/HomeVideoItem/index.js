@@ -40,7 +40,7 @@ const HomeVideoItem = props => {
   }
 
   return (
-    <Link to={`/videos/${id}`}>
+    <Link to={`/videos/${id}`} style={{textDecoration: 'none'}}>
       <EachVideoItemContainer>
         <VideoImageElement src={thumbnailUrl} alt={name} />
         <VideoDetailsContainer>

@@ -1,5 +1,11 @@
 import {Component} from 'react'
 
+import {differenceInYears} from 'date-fns'
+
+import {BsDot} from 'react-icons/bs'
+import {BiLike, BiDislike} from 'react-icons/bi'
+import {MdPlaylistAdd} from 'react-icons/md'
+
 import ReactPlayer from 'react-player'
 
 import Cookies from 'js-cookie'
@@ -12,6 +18,15 @@ import SideBar from '../SideBarContainer'
 import {
   SideBarVideoItemDetailsContainer,
   VideoItemDetailsContainer,
+  VideoTitle,
+  ViewsTimeLikesContainer,
+  ViewTimeContainer,
+  ViewCount,
+  ViewsText,
+  PublishedTimeText,
+  LikesDislikesSaveContainer,
+  ItemContainer,
+  IconText,
 } from './styledComponents'
 
 class VideoItemDetailsRoute extends Component {
@@ -40,7 +55,6 @@ class VideoItemDetailsRoute extends Component {
     if (response.ok) {
       const data = await response.json()
       console.log(data)
-
       const videoDetails = data.video_details
       const channelData = data.video_details.channel
 
@@ -60,7 +74,16 @@ class VideoItemDetailsRoute extends Component {
 
   render() {
     const {videoDetailsData} = this.state
-    const {videoUrl} = videoDetailsData
+    const {videoUrl, title, viewCount, publishedAt} = videoDetailsData
+
+    const formattedDate = publishedDate => {
+      const yearsAgo = differenceInYears(new Date(), new Date(publishedDate))
+
+      if (yearsAgo === 1) {
+        return `1 year ago`
+      }
+      return `${yearsAgo} years ago`
+    }
 
     return (
       <NxtWatchContext.Consumer>
@@ -72,8 +95,40 @@ class VideoItemDetailsRoute extends Component {
               <Header />
               <SideBarVideoItemDetailsContainer>
                 <SideBar themeStatus={themeStatus} />
-                <VideoItemDetailsContainer>
-                  <ReactPlayer url={videoUrl} controls="true" />
+                <VideoItemDetailsContainer themeStatus={themeStatus}>
+                  <ReactPlayer
+                    url={videoUrl}
+                    width="100%"
+                    height="60%"
+                    controls="true"
+                  />
+                  <VideoTitle themeStatus={themeStatus}>{title}</VideoTitle>
+                  <ViewsTimeLikesContainer>
+                    <ViewTimeContainer>
+                      <ViewCount>
+                        {viewCount}
+                        <ViewsText>views</ViewsText>
+                      </ViewCount>
+                      <BsDot />
+                      <PublishedTimeText>
+                        {formattedDate(publishedAt)}
+                      </PublishedTimeText>
+                    </ViewTimeContainer>
+                    <LikesDislikesSaveContainer>
+                      <ItemContainer>
+                        <BiLike />
+                        <IconText>Like</IconText>
+                      </ItemContainer>
+                      <ItemContainer>
+                        <BiDislike />
+                        <IconText>Dislike</IconText>
+                      </ItemContainer>
+                      <ItemContainer>
+                        <MdPlaylistAdd />
+                        <IconText>Save</IconText>
+                      </ItemContainer>
+                    </LikesDislikesSaveContainer>
+                  </ViewsTimeLikesContainer>
                 </VideoItemDetailsContainer>
               </SideBarVideoItemDetailsContainer>
             </>

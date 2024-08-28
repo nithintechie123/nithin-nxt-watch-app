@@ -11,7 +11,11 @@ export const EachVideoItemContainer = styled.li`
 `
 
 export const VideoImageElement = styled.img`
-  width: 250px;
+  max-width: 240px;
+
+  @media screen and (min-width: 768px) {
+    width: 250px;
+  } ;
 `
 export const VideoDetailsContainer = styled.div`
   display: flex;
