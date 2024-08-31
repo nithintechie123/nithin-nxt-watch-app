@@ -22,11 +22,18 @@ import {
   ViewsTimeLikesContainer,
   ViewTimeContainer,
   ViewCount,
-  ViewsText,
   PublishedTimeText,
   LikesDislikesSaveContainer,
   ItemContainer,
   IconText,
+  HorizontalLine,
+  VideoDescriptionContainer,
+  DescProfileImage,
+  ChannelSubDescContainer,
+  ChannelSubscriberContainer,
+  ChannelName,
+  SubscribersCount,
+  VideoDescription,
 } from './styledComponents'
 
 class VideoItemDetailsRoute extends Component {
@@ -54,7 +61,7 @@ class VideoItemDetailsRoute extends Component {
 
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
+
       const videoDetails = data.video_details
       const channelData = data.video_details.channel
 
@@ -67,6 +74,7 @@ class VideoItemDetailsRoute extends Component {
         publishedAt: videoDetails.published_at,
         title: videoDetails.title,
         viewCount: videoDetails.view_count,
+        description: videoDetails.description,
       }
       this.setState({videoDetailsData: formattedData})
     }
@@ -74,7 +82,16 @@ class VideoItemDetailsRoute extends Component {
 
   render() {
     const {videoDetailsData} = this.state
-    const {videoUrl, title, viewCount, publishedAt} = videoDetailsData
+    const {
+      videoUrl,
+      title,
+      viewCount,
+      publishedAt,
+      profileImageUrl,
+      name,
+      subscriberCount,
+      description,
+    } = videoDetailsData
 
     const formattedDate = publishedDate => {
       const yearsAgo = differenceInYears(new Date(), new Date(publishedDate))
@@ -105,10 +122,7 @@ class VideoItemDetailsRoute extends Component {
                   <VideoTitle themeStatus={themeStatus}>{title}</VideoTitle>
                   <ViewsTimeLikesContainer>
                     <ViewTimeContainer>
-                      <ViewCount>
-                        {viewCount}
-                        <ViewsText>views</ViewsText>
-                      </ViewCount>
+                      <ViewCount>{viewCount} views</ViewCount>
                       <BsDot />
                       <PublishedTimeText>
                         {formattedDate(publishedAt)}
@@ -116,19 +130,35 @@ class VideoItemDetailsRoute extends Component {
                     </ViewTimeContainer>
                     <LikesDislikesSaveContainer>
                       <ItemContainer>
-                        <BiLike />
+                        <BiLike color="#909090" />
                         <IconText>Like</IconText>
                       </ItemContainer>
                       <ItemContainer>
-                        <BiDislike />
+                        <BiDislike color="#909090" />
                         <IconText>Dislike</IconText>
                       </ItemContainer>
                       <ItemContainer>
-                        <MdPlaylistAdd />
+                        <MdPlaylistAdd color="#909090" />
                         <IconText>Save</IconText>
                       </ItemContainer>
                     </LikesDislikesSaveContainer>
                   </ViewsTimeLikesContainer>
+                  <HorizontalLine />
+                  <VideoDescriptionContainer>
+                    <DescProfileImage
+                      src={profileImageUrl}
+                      alt="profile image"
+                    />
+                    <ChannelSubDescContainer>
+                      <ChannelSubscriberContainer>
+                        <ChannelName>{name}</ChannelName>
+                        <SubscribersCount>
+                          {subscriberCount} subscribers
+                        </SubscribersCount>
+                      </ChannelSubscriberContainer>
+                      <VideoDescription>{description}</VideoDescription>
+                    </ChannelSubDescContainer>
+                  </VideoDescriptionContainer>
                 </VideoItemDetailsContainer>
               </SideBarVideoItemDetailsContainer>
             </>
