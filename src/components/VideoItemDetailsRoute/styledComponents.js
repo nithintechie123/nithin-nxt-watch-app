@@ -6,9 +6,9 @@ export const SideBarVideoItemDetailsContainer = styled.div`
 
 export const VideoItemDetailsContainer = styled.div`
   background-color: ${props => (props.themeStatus ? ' #f4f4f4' : '#181818')};
-  padding: 20px;
+  padding: 10px;
   height: 100%;
-
+  width: 100vw;
   @media screen and (min-width: 768px) {
     height: 100vh;
     background-size: cover;
@@ -30,23 +30,17 @@ export const ViewsTimeLikesContainer = styled.div`
   flex-wrap: wrap;
 `
 
-export const ViewTimeContainer = styled.div`
+export const ViewLikeContainer = styled.div`
   display: flex;
   align-items: center;
+  font-family: 'Roboto';
+  color: #909090;
+  font-weight: 400;
 `
 
-export const ViewCount = styled.p`
-  margin: 2px;
-  font-size: 14px;
-  color: 'red';
-  font-weight: 500;
-  color: '#cccccc';
-`
+export const ViewText = styled.p``
 
-export const PublishedTimeText = styled.p`
-  margin: 2px;
-  font-size: 13px;
-`
+export const TimeText = styled.p``
 
 export const LikesDislikesSaveContainer = styled.ul`
   list-style-type: none;
@@ -75,9 +69,12 @@ export const HorizontalLine = styled.hr`
   border: 1px solid;
 `
 export const VideoDescriptionContainer = styled.div`
+  font-family: 'Roboto';
   display: flex;
   align-items: flex-start;
-  font-family: 'Roboto';
+
+  @media screen and (min-width: 768px) {
+  }
 `
 
 export const DescProfileImage = styled.img`
@@ -86,21 +83,41 @@ export const DescProfileImage = styled.img`
   margin-right: 10px;
 `
 
-export const ChannelSubDescContainer = styled.div``
-
-export const ChannelSubscriberContainer = styled.div`
+export const ChannelSubDescContainer = styled.div`
   font-family: 'Roboto';
+  font-weight: 400;
 `
 
-export const ChannelName = styled.h1`
+export const ChannelSubscriberContainer = styled.div``
+
+export const ChannelName = styled.p`
   margin: 0px;
   font-size: 1rem;
+
+  color: ${props => (props.themeStatus ? '#000000' : '#ffffff')};
 `
 
 export const SubscribersCount = styled.p`
   font-size: 13px;
+  color: #909090;
 `
 
-export const VideoDescription = styled.p`
+export const MobileVideoDescription = styled.p`
   font-size: 13px;
+  color: ${props => (props.themeStatus ? '#424242' : '#ffffff')};
+  display: flex;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const DesktopVideoDescription = styled.p`
+  font-size: 13px;
+  color: ${props => (props.themeStatus ? '#424242' : '#ffffff')};
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 `

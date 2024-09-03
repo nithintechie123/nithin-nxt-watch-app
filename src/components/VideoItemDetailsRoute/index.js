@@ -20,9 +20,9 @@ import {
   VideoItemDetailsContainer,
   VideoTitle,
   ViewsTimeLikesContainer,
-  ViewTimeContainer,
-  ViewCount,
-  PublishedTimeText,
+  ViewLikeContainer,
+  ViewText,
+  TimeText,
   LikesDislikesSaveContainer,
   ItemContainer,
   IconText,
@@ -33,7 +33,8 @@ import {
   ChannelSubscriberContainer,
   ChannelName,
   SubscribersCount,
-  VideoDescription,
+  MobileVideoDescription,
+  DesktopVideoDescription,
 } from './styledComponents'
 
 class VideoItemDetailsRoute extends Component {
@@ -121,13 +122,11 @@ class VideoItemDetailsRoute extends Component {
                   />
                   <VideoTitle themeStatus={themeStatus}>{title}</VideoTitle>
                   <ViewsTimeLikesContainer>
-                    <ViewTimeContainer>
-                      <ViewCount>{viewCount} views</ViewCount>
+                    <ViewLikeContainer>
+                      <ViewText>{viewCount} views</ViewText>
                       <BsDot />
-                      <PublishedTimeText>
-                        {formattedDate(publishedAt)}
-                      </PublishedTimeText>
-                    </ViewTimeContainer>
+                      <TimeText>{formattedDate(publishedAt)}</TimeText>
+                    </ViewLikeContainer>
                     <LikesDislikesSaveContainer>
                       <ItemContainer>
                         <BiLike color="#909090" />
@@ -151,13 +150,20 @@ class VideoItemDetailsRoute extends Component {
                     />
                     <ChannelSubDescContainer>
                       <ChannelSubscriberContainer>
-                        <ChannelName>{name}</ChannelName>
-                        <SubscribersCount>
+                        <ChannelName themeStatus={themeStatus}>
+                          {name}
+                        </ChannelName>
+                        <SubscribersCount themeStatus={themeStatus}>
                           {subscriberCount} subscribers
                         </SubscribersCount>
                       </ChannelSubscriberContainer>
-                      <VideoDescription>{description}</VideoDescription>
+                      <DesktopVideoDescription themeStatus={themeStatus}>
+                        {description}
+                      </DesktopVideoDescription>
                     </ChannelSubDescContainer>
+                    <MobileVideoDescription themeStatus={themeStatus}>
+                      {description}
+                    </MobileVideoDescription>
                   </VideoDescriptionContainer>
                 </VideoItemDetailsContainer>
               </SideBarVideoItemDetailsContainer>
