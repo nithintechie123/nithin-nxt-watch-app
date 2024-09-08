@@ -2,15 +2,25 @@ import {Component} from 'react'
 
 import Cookies from 'js-cookie'
 
+import {FaFire} from 'react-icons/fa'
+
 import {
   SideBarTrendingRouteContainer,
   TrendingRouteContainer,
+  TrendingLogoHeadingContainer,
+  LogoContainer,
+  TrendingHeading,
 } from './styledComponents'
 
 import Header from '../Header'
 import SideBar from '../SideBarContainer'
+import TrendingVideoCard from '../TrendingVideoCard'
+
+import NxtWatchContext from '../NxtWatchContext/context'
 
 class TrendingRoute extends Component {
+  state = {trendingVideosList: []}
+
   componentDidMount() {
     this.getTrendingData()
   }
@@ -30,20 +40,57 @@ class TrendingRoute extends Component {
     const response = await fetch(trendingApiUrl, options)
 
     const data = await response.json()
-    console.log(data)
+
+    const formattedData = data.videos.map(eachItem => ({
+      id: eachItem.id,
+      channel: {
+        name: eachItem.channel.name,
+        profileImageUrl: eachItem.channel.profile_image_url,
+      },
+      publishedAt: eachItem.published_at,
+      thumbnailUrl: eachItem.thumbnail_url,
+      title: eachItem.title,
+      viewCount: eachItem.view_count,
+    }))
+
+    this.setState({trendingVideosList: formattedData})
   }
 
   render() {
+    const {trendingVideosList} = this.state
+    console.log(trendingVideosList)
+
     return (
-      <>
-        <Header />
-        <SideBarTrendingRouteContainer>
-          <SideBar />
-          <TrendingRouteContainer>
-            <h1>Hello</h1>
-          </TrendingRouteContainer>
-        </SideBarTrendingRouteContainer>
-      </>
+      <NxtWatchContext.Consumer>
+        {value => {
+          const {themeStatus} = value
+          console.log(themeStatus)
+          return (
+            <>
+              <Header />
+              <SideBarTrendingRouteContainer>
+                <SideBar />
+                <TrendingRouteContainer themeStatus={themeStatus}>
+                  <TrendingLogoHeadingContainer themeStatus={themeStatus}>
+                    <LogoContainer themeStatus={themeStatus}>
+                      <FaFire color="#ff0b37" size="25" />
+                    </LogoContainer>
+                    <TrendingHeading themeStatus={themeStatus}>
+                      Trending
+                    </TrendingHeading>
+                  </TrendingLogoHeadingContainer>
+                  {trendingVideosList.map(eachItem => (
+                    <TrendingVideoCard
+                      key={eachItem.id}
+                      eachVideoDetails={eachItem}
+                    />
+                  ))}
+                </TrendingRouteContainer>
+              </SideBarTrendingRouteContainer>
+            </>
+          )
+        }}
+      </NxtWatchContext.Consumer>
     )
   }
 }
