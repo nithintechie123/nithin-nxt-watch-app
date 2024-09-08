@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 import {MdHome, MdPlaylistAdd} from 'react-icons/md'
 import {FaFacebookF, FaTwitter} from 'react-icons/fa'
 
@@ -27,19 +29,23 @@ const SideBar = () => (
       return (
         <SideBarContainer themeStatus={themeStatus}>
           <MenuContainer>
-            <MenuItem>
-              <MdHome color="#616e7c" size={20} />
-              <MenuName>Home</MenuName>
-            </MenuItem>
-            <MenuItem>
-              <HiFire color="#616e7c" size={20} />
-              <MenuName>Trending</MenuName>
-            </MenuItem>
-            <MenuItem>
+            <Link to="/" style={{'text-decoration': 'none'}}>
+              <MenuItem key="HOME">
+                <MdHome color="#616e7c" size={20} />
+                <MenuName>Home</MenuName>
+              </MenuItem>
+            </Link>
+            <Link to="/trending" style={{'text-decoration': 'none'}}>
+              <MenuItem key="TRENDING">
+                <HiFire color="#616e7c" size={20} />
+                <MenuName>Trending</MenuName>
+              </MenuItem>
+            </Link>
+            <MenuItem key="GAMING">
               <SiYoutubegaming color="#616e7c" size={20} />
               <MenuName>Game</MenuName>
             </MenuItem>
-            <MenuItem>
+            <MenuItem key="SAVED_VIDEOS">
               <MdPlaylistAdd color="#616e7c" size={20} />
               <MenuName>Saved videos</MenuName>
             </MenuItem>

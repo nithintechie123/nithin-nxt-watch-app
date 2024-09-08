@@ -19,10 +19,13 @@ export const MenuContainer = styled.ul`
 `
 
 export const MenuItem = styled.li`
+  list-style-type: none;
   display: flex;
   align-items: center;
   cursor: pointer;
 `
+
+export const MenuButton = styled.button``
 
 export const MenuName = styled.h1`
   font-family: 'Roboto';

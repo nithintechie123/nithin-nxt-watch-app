@@ -71,7 +71,7 @@ export const HorizontalLine = styled.hr`
 export const VideoDescriptionContainer = styled.div`
   font-family: 'Roboto';
   display: flex;
-  align-items: flex-start;
+  align-items: column;
 
   @media screen and (min-width: 768px) {
   }
@@ -106,6 +106,8 @@ export const MobileVideoDescription = styled.p`
   font-size: 13px;
   color: ${props => (props.themeStatus ? '#424242' : '#ffffff')};
   display: flex;
+  font-family: 'Roboto';
+  font-weight: 400;
 
   @media screen and (min-width: 768px) {
     display: none;
@@ -116,8 +118,56 @@ export const DesktopVideoDescription = styled.p`
   font-size: 13px;
   color: ${props => (props.themeStatus ? '#424242' : '#ffffff')};
   display: none;
+  font-family: 'Roboto';
+  font-weight: 400;
 
   @media screen and (min-width: 768px) {
     display: flex;
+  }
+`
+
+export const FailureContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto';
+  background-color: ${props => (props.themeStatus ? ' #f4f4f4' : '#181818')};
+  width: 100%;
+  height: 100vh;
+  padding: 10px;
+`
+
+export const FailureImageElement = styled.img`
+  width: 300px;
+`
+
+export const FailureHeading = styled.h1`
+  color: ${props => (props.themeStatus ? '#0f0f0f' : '#ffffff')};
+  text-align: center;
+`
+
+export const FailureDescription = styled.p`
+  color: #909090;
+  text-align: center;
+`
+
+export const RetryButton = styled.button`
+  background-color: #4f46e5;
+  color: 'white';
+  font-family: 'Roboto';
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 4px;
+  width: 100px;
+  padding: 6px;
+  border-width: 0px;
+`
+
+export const LoaderContainer = styled.div`
+  margin: 150px;
+  @media screen and (min-width: 768px) {
+    margin-left: 300px;
   }
 `

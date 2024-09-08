@@ -5,8 +5,11 @@ import {Switch, Route} from 'react-router-dom'
 import Login from './components/Login'
 import Home from './components/Home'
 import VideoItemDetailsRoute from './components/VideoItemDetailsRoute'
+import TrendingRoute from './components/TrendingRoute'
 
 import NxtWatchContext from './components/NxtWatchContext/context'
+
+import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
 
@@ -28,9 +31,14 @@ class App extends Component {
         value={{themeStatus, changeThemeButton: this.changeThemeButton}}
       >
         <Switch>
-          <Route exact path="/" component={Home} />
+          <ProtectedRoute exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/videos/:id" component={VideoItemDetailsRoute} />
+          <ProtectedRoute
+            exact
+            path="/videos/:id"
+            component={VideoItemDetailsRoute}
+          />
+          <Route exact path="/trending" component={TrendingRoute} />
         </Switch>
       </NxtWatchContext.Provider>
     )
