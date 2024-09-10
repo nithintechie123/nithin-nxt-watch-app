@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import Login from './components/Login'
 import Home from './components/Home'
@@ -11,8 +11,11 @@ import NxtWatchContext from './components/NxtWatchContext/context'
 
 import ProtectedRoute from './components/ProtectedRoute'
 
-import './App.css'
 import GamingRoute from './components/GamingRoute'
+
+import NotFound from './components/NotFound'
+
+import './App.css'
 
 // Replace your code here
 
@@ -41,6 +44,8 @@ class App extends Component {
           />
           <ProtectedRoute exact path="/trending" component={TrendingRoute} />
           <ProtectedRoute exact path="/gaming" component={GamingRoute} />
+          <ProtectedRoute exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </NxtWatchContext.Provider>
     )

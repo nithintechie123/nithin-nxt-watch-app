@@ -22,6 +22,8 @@ import {
   FooterDescription,
 } from './styledComponents'
 
+import './index.css'
+
 const SideBar = () => (
   <NxtWatchContext.Consumer>
     {value => {
@@ -29,19 +31,19 @@ const SideBar = () => (
       return (
         <SideBarContainer themeStatus={themeStatus}>
           <MenuContainer>
-            <Link to="/" style={{'text-decoration': 'none'}}>
+            <Link to="/" className="link">
               <MenuItem key="HOME">
                 <MdHome color="#616e7c" size={20} />
                 <MenuName>Home</MenuName>
               </MenuItem>
             </Link>
-            <Link to="/trending" style={{'text-decoration': 'none'}}>
+            <Link to="/trending" className="link">
               <MenuItem key="TRENDING">
                 <HiFire color="#616e7c" size={20} />
                 <MenuName>Trending</MenuName>
               </MenuItem>
             </Link>
-            <Link to="/gaming" style={{'text-decoration': 'none'}}>
+            <Link to="/gaming" className="link">
               <MenuItem key="GAMING">
                 <SiYoutubegaming color="#616e7c" size={20} />
                 <MenuName>Gaming</MenuName>

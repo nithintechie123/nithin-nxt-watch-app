@@ -55,7 +55,7 @@ class GamingRoute extends Component {
     const response = await fetch(gamingApiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      console.log(data)
+
       const formattedData = data.videos.map(eachItem => ({
         id: eachItem.id,
         thumbnailUrl: eachItem.thumbnail_url,
@@ -75,7 +75,6 @@ class GamingRoute extends Component {
     <NxtWatchContext.Consumer>
       {value => {
         const {themeStatus} = value
-        console.log(themeStatus)
 
         const lightImage =
           'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
@@ -115,7 +114,7 @@ class GamingRoute extends Component {
       <NxtWatchContext.Consumer>
         {value => {
           const {themeStatus} = value
-          console.log(themeStatus)
+
           return (
             <GamingRouteContainer themeStatus={themeStatus}>
               <GamingLogoHeadingContainer themeStatus={themeStatus}>

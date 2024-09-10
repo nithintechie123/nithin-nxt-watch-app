@@ -55,7 +55,8 @@ export const GetItNowButton = styled.button`
 `
 
 export const HomeVideosContainer = styled.div`
-  padding: 20px;
+  display: flex;
+  align-items: center;
 `
 export const SearchInputContainer = styled.div`
   display: flex;

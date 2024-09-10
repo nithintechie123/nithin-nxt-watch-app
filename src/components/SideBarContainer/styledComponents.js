@@ -15,7 +15,7 @@ export const SideBarContainer = styled.div`
 
 export const MenuContainer = styled.ul`
   width: 200px;
-  padding: 20px;
+  padding: 0px;
 `
 
 export const MenuItem = styled.li`
@@ -23,6 +23,7 @@ export const MenuItem = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding-left: 20px;
 `
 
 export const MenuButton = styled.button``
