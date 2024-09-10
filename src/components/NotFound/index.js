@@ -31,12 +31,12 @@ const NotFound = () => (
           <SideBarNotFoundContainer>
             <SideBar />
             <NotFoundContainer themeStatus={themeStatus}>
-              <NotFoundImage src={ActiveImageUrl} />
+              <NotFoundImage src={ActiveImageUrl} alt="not found" />
               <NotFoundHeading themeStatus={themeStatus}>
                 Page Not Found
               </NotFoundHeading>
               <NotFoundDescription>
-                We are sorry,the page you requested could not be found.
+                we are sorry, the page you requested could not be found.
               </NotFoundDescription>
             </NotFoundContainer>
           </SideBarNotFoundContainer>
