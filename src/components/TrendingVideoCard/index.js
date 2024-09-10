@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 import {differenceInYears} from 'date-fns'
 
 import {BsDot} from 'react-icons/bs'
@@ -28,6 +30,7 @@ const TrendingVideoCard = props => {
     title,
     viewCount,
     publishedAt,
+    id,
   } = eachVideoDetails
 
   const formattedDate = publishedDate => {
@@ -46,7 +49,9 @@ const TrendingVideoCard = props => {
 
         return (
           <TrendingVideoCardContainer>
-            <TrendingVideoImage src={thumbnailUrl} />
+            <Link to={`/videos/${id}`}>
+              <TrendingVideoImage src={thumbnailUrl} />
+            </Link>
             <MobileProfileTextContainer>
               <MobileProfileImage src={channel.profileImageUrl} />
               <MobileViewTextContainer>

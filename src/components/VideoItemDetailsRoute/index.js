@@ -103,6 +103,10 @@ class VideoItemDetailsRoute extends Component {
     }
   }
 
+  onClickRetryButton = () => {
+    this.setState({apiStatus: apiStatusConstants.success}, this.getVideoDetails)
+  }
+
   renderFailureView = () => (
     <NxtWatchContext.Consumer>
       {value => {
@@ -126,7 +130,9 @@ class VideoItemDetailsRoute extends Component {
               We are having some trouble to complete your request.Please try
               again.
             </FailureDescription>
-            <RetryButton data-testid="button">Retry</RetryButton>
+            <RetryButton data-testid="button" onClick={this.onClickRetryButton}>
+              Retry
+            </RetryButton>
           </FailureContainer>
         )
       }}

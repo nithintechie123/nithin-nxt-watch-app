@@ -4,27 +4,27 @@ import Loader from 'react-loader-spinner'
 
 import Cookies from 'js-cookie'
 
-import {FaFire} from 'react-icons/fa'
+import {SiYoutubegaming} from 'react-icons/si'
 
 import {
-  SideBarTrendingRouteContainer,
-  TrendingRouteContainer,
-  TrendingLogoHeadingContainer,
-  LogoContainer,
-  TrendingHeading,
   FailureContainer,
   FailureImageElement,
   FailureHeading,
-  LoaderContainer,
   FailureDescription,
   RetryButton,
+  LoaderContainer,
+  GamingRouteContainer,
+  GamingLogoHeadingContainer,
+  GamingHeading,
+  SideBarGamingRouteContainer,
+  LogoContainer,
+  GamingCardContainer,
 } from './styledComponents'
 
+import NxtWatchContext from '../NxtWatchContext/context'
 import Header from '../Header'
 import SideBar from '../SideBarContainer'
-import TrendingVideoCard from '../TrendingVideoCard'
-
-import NxtWatchContext from '../NxtWatchContext/context'
+import GamingCard from '../GamingCard'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -33,18 +33,18 @@ const apiStatusConstants = {
   inProgress: 'INPROGRESS',
 }
 
-class TrendingRoute extends Component {
-  state = {trendingVideosList: [], apiStatus: apiStatusConstants.initial}
+class GamingRoute extends Component {
+  state = {gamingDetailsList: [], apiStatus: apiStatusConstants.initial}
 
   componentDidMount() {
-    this.getTrendingData()
+    this.getGamingData()
   }
 
-  getTrendingData = async () => {
+  getGamingData = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
     const jwtToken = Cookies.get('jwt_token')
 
-    const trendingApiUrl = 'https://apis.ccbp.in/videos/trending'
+    const gamingApiUrl = 'https://apis.ccbp.in/videos/gaming'
 
     const options = {
       method: 'GET',
@@ -52,34 +52,23 @@ class TrendingRoute extends Component {
         Authorization: `Bearer ${jwtToken}`,
       },
     }
-    const response = await fetch(trendingApiUrl, options)
-
-    const data = await response.json()
-
+    const response = await fetch(gamingApiUrl, options)
     if (response.ok) {
+      const data = await response.json()
+      console.log(data)
       const formattedData = data.videos.map(eachItem => ({
         id: eachItem.id,
-        channel: {
-          name: eachItem.channel.name,
-          profileImageUrl: eachItem.channel.profile_image_url,
-        },
-        publishedAt: eachItem.published_at,
         thumbnailUrl: eachItem.thumbnail_url,
         title: eachItem.title,
         viewCount: eachItem.view_count,
       }))
-
       this.setState({
-        trendingVideosList: formattedData,
+        gamingDetailsList: formattedData,
         apiStatus: apiStatusConstants.success,
       })
     } else {
       this.setState({apiStatus: apiStatusConstants.failure})
     }
-  }
-
-  onClickRetryButton = () => {
-    this.setState({apiStatus: apiStatusConstants.success}, this.getTrendingData)
   }
 
   renderFailureView = () => (
@@ -120,30 +109,27 @@ class TrendingRoute extends Component {
     </LoaderContainer>
   )
 
-  renderTrendingRoute = () => {
-    const {trendingVideosList} = this.state
-
+  renderGamingDetails = () => {
+    const {gamingDetailsList} = this.state
     return (
       <NxtWatchContext.Consumer>
         {value => {
           const {themeStatus} = value
+          console.log(themeStatus)
           return (
-            <TrendingRouteContainer themeStatus={themeStatus}>
-              <TrendingLogoHeadingContainer themeStatus={themeStatus}>
+            <GamingRouteContainer themeStatus={themeStatus}>
+              <GamingLogoHeadingContainer themeStatus={themeStatus}>
                 <LogoContainer themeStatus={themeStatus}>
-                  <FaFire color="#ff0b37" size="25" />
+                  <SiYoutubegaming color="#ff0b37" size="25" />
                 </LogoContainer>
-                <TrendingHeading themeStatus={themeStatus}>
-                  Trending
-                </TrendingHeading>
-              </TrendingLogoHeadingContainer>
-              {trendingVideosList.map(eachItem => (
-                <TrendingVideoCard
-                  key={eachItem.id}
-                  eachVideoDetails={eachItem}
-                />
-              ))}
-            </TrendingRouteContainer>
+                <GamingHeading themeStatus={themeStatus}>Gaming</GamingHeading>
+              </GamingLogoHeadingContainer>
+              <GamingCardContainer>
+                {gamingDetailsList.map(eachGame => (
+                  <GamingCard key={eachGame.id} eachGameDetails={eachGame} />
+                ))}
+              </GamingCardContainer>
+            </GamingRouteContainer>
           )
         }}
       </NxtWatchContext.Consumer>
@@ -156,7 +142,7 @@ class TrendingRoute extends Component {
       case apiStatusConstants.inProgress:
         return this.renderLoaderContainer()
       case apiStatusConstants.success:
-        return this.renderTrendingRoute()
+        return this.renderGamingDetails()
       case apiStatusConstants.failure:
         return this.renderFailureView()
       default:
@@ -168,13 +154,13 @@ class TrendingRoute extends Component {
     return (
       <>
         <Header />
-        <SideBarTrendingRouteContainer>
+        <SideBarGamingRouteContainer>
           <SideBar />
           {this.renderContent()}
-        </SideBarTrendingRouteContainer>
+        </SideBarGamingRouteContainer>
       </>
     )
   }
 }
 
-export default TrendingRoute
+export default GamingRoute

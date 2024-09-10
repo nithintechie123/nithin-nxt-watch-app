@@ -1,23 +1,18 @@
 import styled from 'styled-components'
 
-export const SideBarTrendingRouteContainer = styled.div`
+export const SideBarGamingRouteContainer = styled.div`
   display: flex;
   width: 100%;
 `
 
-export const TrendingRouteContainer = styled.ul`
+export const GamingRouteContainer = styled.div`
   width: 100%;
   padding: 0px;
   margin: 0px;
   background-color: ${props => (props.themeStatus ? ' #f4f4f4' : ' #0f0f0f')};
-  list-style-type: none;
-
-  @media and screen (max-width: 576px) {
-    display: none;
-  }
 `
 
-export const TrendingLogoHeadingContainer = styled.div`
+export const GamingLogoHeadingContainer = styled.div`
   height: 100px;
   display: flex;
   align-items: center;
@@ -36,11 +31,19 @@ export const LogoContainer = styled.div`
   justify-content: center;
   border-radius: 40px;
 `
-export const TrendingHeading = styled.h1`
+export const GamingHeading = styled.h1`
   font-family: 'Roboto';
   color: ${props => (props.themeStatus ? ' #000000' : '#ffffff')};
   margin-left: 50px;
 `
+export const GamingCardContainer = styled.ul`
+  list-style-type: none;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+`
+
 export const FailureContainer = styled.div`
   display: flex;
   flex-direction: column;

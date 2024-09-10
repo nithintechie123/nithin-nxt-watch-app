@@ -41,10 +41,12 @@ const SideBar = () => (
                 <MenuName>Trending</MenuName>
               </MenuItem>
             </Link>
-            <MenuItem key="GAMING">
-              <SiYoutubegaming color="#616e7c" size={20} />
-              <MenuName>Game</MenuName>
-            </MenuItem>
+            <Link to="/gaming" style={{'text-decoration': 'none'}}>
+              <MenuItem key="GAMING">
+                <SiYoutubegaming color="#616e7c" size={20} />
+                <MenuName>Gaming</MenuName>
+              </MenuItem>
+            </Link>
             <MenuItem key="SAVED_VIDEOS">
               <MdPlaylistAdd color="#616e7c" size={20} />
               <MenuName>Saved videos</MenuName>

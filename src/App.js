@@ -12,6 +12,7 @@ import NxtWatchContext from './components/NxtWatchContext/context'
 import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
+import GamingRoute from './components/GamingRoute'
 
 // Replace your code here
 
@@ -39,6 +40,7 @@ class App extends Component {
             component={VideoItemDetailsRoute}
           />
           <ProtectedRoute exact path="/trending" component={TrendingRoute} />
+          <ProtectedRoute exact path="/gaming" component={GamingRoute} />
         </Switch>
       </NxtWatchContext.Provider>
     )

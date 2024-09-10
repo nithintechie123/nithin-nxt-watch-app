@@ -15,7 +15,7 @@ export const TrendingVideoImage = styled.img`
   margin-right: 10px;
 
   @media screen and (max-width: 576px) {
-    width: 250px;
+    width: 100%;
   }
 `
 
