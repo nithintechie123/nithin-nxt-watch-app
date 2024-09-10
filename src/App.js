@@ -38,7 +38,7 @@ class App extends Component {
             path="/videos/:id"
             component={VideoItemDetailsRoute}
           />
-          <Route exact path="/trending" component={TrendingRoute} />
+          <ProtectedRoute exact path="/trending" component={TrendingRoute} />
         </Switch>
       </NxtWatchContext.Provider>
     )
