@@ -24,35 +24,59 @@ import {
 
 import './index.css'
 
+const activeMenuConstants = {
+  initial: 'INITIAL',
+  home: 'HOME',
+  trending: 'TRENDING',
+  gaming: 'GAMING',
+  savedVideos: 'SAVED_VIDEOS',
+}
+
 const SideBar = () => (
   <NxtWatchContext.Consumer>
     {value => {
-      const {themeStatus} = value
+      const {themeStatus, changeActiveMenu} = value
       return (
         <SideBarContainer themeStatus={themeStatus}>
           <MenuContainer>
             <Link to="/" className="link">
-              <MenuItem key="HOME">
+              <MenuItem
+                key="HOME"
+                onClick={() => changeActiveMenu(activeMenuConstants.home)}
+              >
                 <MdHome color="#616e7c" size={20} />
                 <MenuName>Home</MenuName>
               </MenuItem>
             </Link>
             <Link to="/trending" className="link">
-              <MenuItem key="TRENDING">
+              <MenuItem
+                key="TRENDING"
+                onClick={() => changeActiveMenu(activeMenuConstants.trending)}
+              >
                 <HiFire color="#616e7c" size={20} />
                 <MenuName>Trending</MenuName>
               </MenuItem>
             </Link>
             <Link to="/gaming" className="link">
-              <MenuItem key="GAMING">
+              <MenuItem
+                key="GAMING"
+                onClick={() => changeActiveMenu(activeMenuConstants.gaming)}
+              >
                 <SiYoutubegaming color="#616e7c" size={20} />
                 <MenuName>Gaming</MenuName>
               </MenuItem>
             </Link>
-            <MenuItem key="SAVED_VIDEOS">
-              <MdPlaylistAdd color="#616e7c" size={20} />
-              <MenuName>Saved videos</MenuName>
-            </MenuItem>
+            <Link to="/saved-videos" className="link">
+              <MenuItem
+                key="SAVED_VIDEOS"
+                onClick={() =>
+                  changeActiveMenu(activeMenuConstants.savedVideos)
+                }
+              >
+                <MdPlaylistAdd color="#616e7c" size={20} />
+                <MenuName>Saved videos</MenuName>
+              </MenuItem>
+            </Link>
           </MenuContainer>
           <FooterContainer>
             <ContactUsHeading themeStatus={themeStatus}>

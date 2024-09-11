@@ -6,21 +6,27 @@ import Login from './components/Login'
 import Home from './components/Home'
 import VideoItemDetailsRoute from './components/VideoItemDetailsRoute'
 import TrendingRoute from './components/TrendingRoute'
-
 import NxtWatchContext from './components/NxtWatchContext/context'
-
-import ProtectedRoute from './components/ProtectedRoute'
-
 import GamingRoute from './components/GamingRoute'
-
 import NotFound from './components/NotFound'
+import SavedVideosRoute from './components/SavedVideoRoute'
 
 import './App.css'
 
+import ProtectedRoute from './components/ProtectedRoute'
+
 // Replace your code here
 
+const activeMenuConstants = {
+  initial: 'INITIAL',
+  home: 'HOME',
+  trending: 'TRENDING',
+  gaming: 'GAMING',
+  savedVideos: 'SAVED_VIDEOS',
+}
+
 class App extends Component {
-  state = {themeStatus: true}
+  state = {themeStatus: true, activeMenu: activeMenuConstants.initial}
 
   changeThemeButton = () => {
     this.setState(prevState => ({
@@ -28,11 +34,21 @@ class App extends Component {
     }))
   }
 
+  changeActiveMenu = value => {
+    this.setState({activeMenu: value})
+  }
+
   render() {
-    const {themeStatus} = this.state
+    const {themeStatus, activeMenu} = this.state
+    console.log(activeMenu)
     return (
       <NxtWatchContext.Provider
-        value={{themeStatus, changeThemeButton: this.changeThemeButton}}
+        value={{
+          themeStatus,
+          activeMenu,
+          changeThemeButton: this.changeThemeButton,
+          changeActiveMenu: this.changeActiveMenu,
+        }}
       >
         <Switch>
           <ProtectedRoute exact path="/" component={Home} />
@@ -44,6 +60,11 @@ class App extends Component {
           />
           <ProtectedRoute exact path="/trending" component={TrendingRoute} />
           <ProtectedRoute exact path="/gaming" component={GamingRoute} />
+          <ProtectedRoute
+            exacct
+            path="/saved-videos"
+            component={SavedVideosRoute}
+          />
           <ProtectedRoute exact path="/not-found" component={NotFound} />
           <Redirect to="/not-found" />
         </Switch>

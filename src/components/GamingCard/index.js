@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 import {
   GamingCardItem,
   ThumbnailImage,
@@ -9,7 +11,7 @@ import NxtWatchContext from '../NxtWatchContext/context'
 
 const GamingCard = props => {
   const {eachGameDetails} = props
-  const {thumbnailUrl, title, viewCount} = eachGameDetails
+  const {thumbnailUrl, title, viewCount, id} = eachGameDetails
 
   return (
     <NxtWatchContext.Consumer>
@@ -18,7 +20,9 @@ const GamingCard = props => {
 
         return (
           <GamingCardItem>
-            <ThumbnailImage src={thumbnailUrl} />
+            <Link to={`/videos/${id}`}>
+              <ThumbnailImage src={thumbnailUrl} />
+            </Link>
             <EachGameHeading themeStatus={themeStatus}>{title}</EachGameHeading>
             <LiveViewCount>{viewCount} Watching Worldwide</LiveViewCount>
           </GamingCardItem>
