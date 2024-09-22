@@ -5,6 +5,7 @@ const NxtWatchContext = React.createContext({
   activeMenu: 'INITIAL',
   changeActiveMenu: () => {},
   changeThemeButton: () => {},
+  likeStatus: false,
 })
 
 export default NxtWatchContext

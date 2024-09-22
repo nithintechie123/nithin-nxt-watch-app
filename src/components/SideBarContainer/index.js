@@ -35,7 +35,8 @@ const activeMenuConstants = {
 const SideBar = () => (
   <NxtWatchContext.Consumer>
     {value => {
-      const {themeStatus, changeActiveMenu} = value
+      const {themeStatus, changeActiveMenu, activeMenu} = value
+
       return (
         <SideBarContainer themeStatus={themeStatus}>
           <MenuContainer>
@@ -43,8 +44,16 @@ const SideBar = () => (
               <MenuItem
                 key="HOME"
                 onClick={() => changeActiveMenu(activeMenuConstants.home)}
+                isActive={activeMenu === activeMenuConstants.home}
               >
-                <MdHome color="#616e7c" size={20} />
+                <MdHome
+                  color={
+                    activeMenu === activeMenuConstants.home
+                      ? '#ff0000'
+                      : '#616e7c'
+                  }
+                  size={20}
+                />
                 <MenuName>Home</MenuName>
               </MenuItem>
             </Link>
@@ -52,8 +61,16 @@ const SideBar = () => (
               <MenuItem
                 key="TRENDING"
                 onClick={() => changeActiveMenu(activeMenuConstants.trending)}
+                isActive={activeMenu === activeMenuConstants.trending}
               >
-                <HiFire color="#616e7c" size={20} />
+                <HiFire
+                  color={
+                    activeMenu === activeMenuConstants.trending
+                      ? '#ff0000'
+                      : '#616e7c'
+                  }
+                  size={20}
+                />
                 <MenuName>Trending</MenuName>
               </MenuItem>
             </Link>
@@ -61,8 +78,16 @@ const SideBar = () => (
               <MenuItem
                 key="GAMING"
                 onClick={() => changeActiveMenu(activeMenuConstants.gaming)}
+                isActive={activeMenu === activeMenuConstants.gaming}
               >
-                <SiYoutubegaming color="#616e7c" size={20} />
+                <SiYoutubegaming
+                  color={
+                    activeMenu === activeMenuConstants.gaming
+                      ? '#ff0000'
+                      : '#616e7c'
+                  }
+                  size={20}
+                />
                 <MenuName>Gaming</MenuName>
               </MenuItem>
             </Link>
@@ -72,8 +97,16 @@ const SideBar = () => (
                 onClick={() =>
                   changeActiveMenu(activeMenuConstants.savedVideos)
                 }
+                isActive={activeMenu === activeMenuConstants.savedVideos}
               >
-                <MdPlaylistAdd color="#616e7c" size={20} />
+                <MdPlaylistAdd
+                  color={
+                    activeMenu === activeMenuConstants.savedVideos
+                      ? '#ff0000'
+                      : '#616e7c'
+                  }
+                  size={20}
+                />
                 <MenuName>Saved videos</MenuName>
               </MenuItem>
             </Link>

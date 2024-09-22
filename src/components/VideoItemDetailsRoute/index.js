@@ -26,7 +26,6 @@ import {
   TimeText,
   LikesDislikesSaveContainer,
   ItemContainer,
-  IconText,
   HorizontalLine,
   VideoDescriptionContainer,
   DescProfileImage,
@@ -42,6 +41,9 @@ import {
   FailureDescription,
   RetryButton,
   LoaderContainer,
+  LikeText,
+  DisLikeText,
+  SaveText,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -52,10 +54,27 @@ const apiStatusConstants = {
 }
 
 class VideoItemDetailsRoute extends Component {
-  state = {videoDetailsData: [], apiStatus: apiStatusConstants.initial}
+  state = {
+    videoDetailsData: [],
+    apiStatus: apiStatusConstants.initial,
+    likeStatus: false,
+    dislikeStatus: false,
+  }
 
   componentDidMount() {
     this.getVideoDetails()
+  }
+
+  onClickLikeButton = () => {
+    this.setState(prevState => ({
+      likeStatus: !prevState.likeStatus,
+    }))
+  }
+
+  onClickDislikeButton = () => {
+    this.setState(prevState => ({
+      dislikeStatus: !prevState.dislikeStatus,
+    }))
   }
 
   getVideoDetails = async () => {
@@ -140,7 +159,7 @@ class VideoItemDetailsRoute extends Component {
   )
 
   renderVideoItemDetails = () => {
-    const {videoDetailsData} = this.state
+    const {videoDetailsData, likeStatus, dislikeStatus} = this.state
     const {
       videoUrl,
       title,
@@ -151,7 +170,7 @@ class VideoItemDetailsRoute extends Component {
       subscriberCount,
       description,
     } = videoDetailsData
-
+    console.log(likeStatus)
     const formattedDate = publishedDate => {
       const yearsAgo = differenceInYears(new Date(), new Date(publishedDate))
 
@@ -160,6 +179,9 @@ class VideoItemDetailsRoute extends Component {
       }
       return `${yearsAgo} years ago`
     }
+
+    const activeColor = likeStatus ? ' #3b82f6' : '#909090'
+    console.log(activeColor)
 
     return (
       <NxtWatchContext.Consumer>
@@ -181,17 +203,25 @@ class VideoItemDetailsRoute extends Component {
                   <TimeText>{formattedDate(publishedAt)}</TimeText>
                 </ViewLikeContainer>
                 <LikesDislikesSaveContainer>
-                  <ItemContainer>
-                    <BiLike color="#909090" />
-                    <IconText>Like</IconText>
+                  <ItemContainer onClick={this.onClickLikeButton}>
+                    <BiLike
+                      size={25}
+                      color={likeStatus ? ' #3b82f6' : '#909090'}
+                    />
+                    <LikeText color={activeColor}>Like</LikeText>
                   </ItemContainer>
-                  <ItemContainer>
-                    <BiDislike color="#909090" />
-                    <IconText>Dislike</IconText>
+                  <ItemContainer onClick={this.onClickDislikeButton}>
+                    <BiDislike
+                      size={25}
+                      color={dislikeStatus ? ' #3b82f6' : '#909090'}
+                    />
+                    <DisLikeText dislikeStatus={dislikeStatus}>
+                      Dislike
+                    </DisLikeText>
                   </ItemContainer>
                   <ItemContainer>
                     <MdPlaylistAdd color="#909090" />
-                    <IconText>Save</IconText>
+                    <SaveText>Save</SaveText>
                   </ItemContainer>
                 </LikesDislikesSaveContainer>
               </ViewsTimeLikesContainer>

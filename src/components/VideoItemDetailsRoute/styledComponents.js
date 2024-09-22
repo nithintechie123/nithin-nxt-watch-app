@@ -48,21 +48,36 @@ export const LikesDislikesSaveContainer = styled.ul`
   align-items: center;
   justify-content: space-between;
   padding: 0px;
-  width: 220px;
+  width: 250px;
   margin: 0px;
 `
 
 export const ItemContainer = styled.li`
   display: flex;
   align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
 `
 
-export const IconText = styled.p`
+export const LikeText = styled.p`
   font-family: 'Roboto';
-  margin-left: 10px;
+  margin-left: 5px;
+  font-weight: 500;
+`
+export const DisLikeText = styled.p`
+  font-family: 'Roboto';
+  margin-left: 5px;
   color: #909090;
   font-weight: 500;
 `
+
+export const SaveText = styled.p`
+  font-family: 'Roboto';
+  margin-left: 5px;
+  color: #909090;
+  font-weight: 500;
+`
+
 export const HorizontalLine = styled.hr`
   width: 100%;
   color: #d7dfe9;

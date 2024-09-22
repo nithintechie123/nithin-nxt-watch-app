@@ -13,10 +13,6 @@ export const HeaderNavContainer = styled.nav`
 export const WebsiteLogo = styled.img`
   width: 100px;
   cursor: pointer;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.05);
 
   @media screen and (min-width: 768px) {
     width: 120px;
@@ -60,18 +56,10 @@ export const ThemeButton = styled.button`
   outline: none;
   border-width: 0px;
   cursor: pointer;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.1);
 `
 
 export const ProfileImageElement = styled.img`
   width: 28px;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.05);
 `
 
 export const LogoutButton = styled.button`
@@ -86,9 +74,4 @@ export const LogoutButton = styled.button`
   padding: 5px;
   width: 80px;
   border-radius: 4px;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:#ffffff; 
-    transform: scale(1.05);
-
 `

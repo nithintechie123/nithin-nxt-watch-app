@@ -18,7 +18,6 @@ export const BannerContainer = styled.div`
 
   @media screen and (min-width: 578px) {
     background-size: cover;
-
     height: 200px;
   }
 `
@@ -55,20 +54,15 @@ export const GetItNowButton = styled.button`
 `
 
 export const HomeVideosContainer = styled.div`
-  display: flex;
-  align-items: center;
+  padding: 20px;
 `
+
 export const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
   max-width: 300px;
   border-radius: 2px;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.05);
 `
-
 export const SearchInput = styled.input`
   font-family: 'Roboto';
   font-size: 15px;

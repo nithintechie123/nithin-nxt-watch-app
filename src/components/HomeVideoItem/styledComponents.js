@@ -4,10 +4,6 @@ export const EachVideoItemContainer = styled.li`
   margin-right: 20px;
   margin-bottom: 20px;
   cursor: pointer;
-   transition: background-color 0.3s, transform 0.3s;
-    &:hover {
-    background-color:"transparent"; 
-    transform: scale(1.05);
 `
 
 export const VideoImageElement = styled.img`

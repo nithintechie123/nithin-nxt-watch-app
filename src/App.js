@@ -61,7 +61,7 @@ class App extends Component {
           <ProtectedRoute exact path="/trending" component={TrendingRoute} />
           <ProtectedRoute exact path="/gaming" component={GamingRoute} />
           <ProtectedRoute
-            exacct
+            exact
             path="/saved-videos"
             component={SavedVideosRoute}
           />

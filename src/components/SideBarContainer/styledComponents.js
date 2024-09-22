@@ -6,16 +6,16 @@ export const SideBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px;
+  width: 220px;
   @media screen and (max-width: 768px) {
     display: none;
-    width: 100vh;
   }
 `
 
 export const MenuContainer = styled.ul`
-  width: 200px;
   padding: 0px;
+  margin-top: 50px;
+  width: 220px;
 `
 
 export const MenuItem = styled.li`
@@ -24,6 +24,8 @@ export const MenuItem = styled.li`
   align-items: center;
   cursor: pointer;
   padding-left: 20px;
+  height: 42px;
+  background-color: ${props => (props.isActive ? '#e2e8f0' : 'transparent')};
 `
 
 export const MenuButton = styled.button``
